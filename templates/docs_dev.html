@@ -1,0 +1,250 @@
+{% extends "base.html" %} {% block title %}Developer Guide | Comparative NER
+Architecture{% endblock %} {% block content %}
+<div class="max-w-4xl mx-auto px-4 py-20">
+  <!-- Header -->
+  <div class="mb-16" data-aos="fade-down">
+    <h1 class="text-4xl font-display font-black text-slate-900 mb-4">
+      Developer Manual
+    </h1>
+    <p class="text-xl text-slate-500 leading-relaxed">
+      A comprehensive guide for setting up the environment, installing
+      dependencies, and navigating the codebase.
+    </p>
+  </div>
+
+  <div class="space-y-16">
+    <!-- 1. Development Environment -->
+    <section
+      class="bg-white p-10 md:p-16 rounded-[2.5rem] border-2 border-slate-100 shadow-sm"
+      data-aos="fade-up"
+    >
+      <h3
+        class="text-2xl font-display font-black text-slate-900 mb-8 border-l-4 border-primary pl-6"
+      >
+        Step 1: The Environment
+      </h3>
+
+      <div class="space-y-8">
+        <div>
+          <h4 class="font-bold text-slate-800 mb-3">Editor Installation</h4>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            We recommend using <strong>Visual Studio Code (VS Code)</strong>.
+            It’s the industry standard and makes working with Python much
+            easier. Once installed, make sure to add the "Python" extension by
+            Microsoft from the Marketplace to get full support for the code.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-slate-800 mb-3">Python Installation</h4>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            Download and install <strong>Python 3.12+</strong> from the official
+            website. During installation on Windows, it is very important to
+            check the box that says <strong>"Add Python to PATH"</strong>. This
+            allows you to run python commands from any terminal or command
+            prompt.
+          </p>
+        </div>
+
+        <div class="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
+          <p
+            class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-3"
+          >
+            Verification Command
+          </p>
+          <code class="text-xs font-mono text-indigo-700"
+            >python --version</code
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Configuration & Dependencies -->
+    <section
+      class="bg-white p-10 md:p-16 rounded-[3rem] border-2 border-slate-100 shadow-sm"
+      data-aos="fade-up"
+    >
+      <h3
+        class="text-2xl font-display font-black text-slate-900 mb-8 border-l-4 border-emerald-500 pl-6"
+      >
+        Step 2: Configuration
+      </h3>
+      <p class="text-slate-600 leading-relaxed mb-8">
+        Once Python is ready, you need to set up a clean space for the project.
+        Using a virtual environment is the best way to keep your project
+        packages separate from your main system.
+      </p>
+
+      <div class="space-y-6">
+        <!-- Venv Setup -->
+        <div
+          class="bg-slate-900 rounded-2xl p-8 text-white relative overflow-hidden"
+        >
+          <div class="absolute right-0 top-0 p-4 opacity-10">
+            <i class="ri-terminal-box-line text-6xl"></i>
+          </div>
+          <p
+            class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-6"
+          >
+            Setup Commands
+          </p>
+          <div class="space-y-4 font-mono text-xs">
+            <div class="flex gap-4">
+              <span class="text-slate-500"># 1. Create environment</span>
+              <span class="text-emerald-300">python -m venv venv</span>
+            </div>
+            <div class="flex gap-4">
+              <span class="text-slate-500"># 2. Activate (Windows)</span>
+              <span class="text-emerald-300">venv\Scripts\activate</span>
+            </div>
+            <div class="flex gap-4">
+              <span class="text-slate-500"># 3. Install Packages</span>
+              <span class="text-emerald-300"
+                >pip install -r requirements.txt</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
+          <p class="text-amber-800 text-sm leading-relaxed">
+            <strong>Note:</strong> Installing the packages can take a few
+            minutes as it downloads spaCy and the CRF libraries. If you
+            encounter any error, make sure your internet is stable and your pip
+            is up to date: <code>python -m pip install --upgrade pip</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Folder Structure -->
+    <section
+      class="bg-white p-10 md:p-16 rounded-[3rem] border-2 border-slate-100 shadow-sm"
+      data-aos="fade-up"
+    >
+      <h3
+        class="text-2xl font-display font-black text-slate-900 mb-8 border-l-4 border-secondary pl-6"
+      >
+        Step 3: Understanding the Structure
+      </h3>
+      <p class="text-slate-600 leading-relaxed mb-8">
+        The codebase is organized logically to separate the AI logic from the
+        web interface. Here is a map of where everything lives.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Folders -->
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div
+              class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-primary transition-colors"
+            >
+              <i class="ri-folder-open-line text-xl"></i>
+            </div>
+            <div>
+              <p class="font-bold text-slate-900">/models</p>
+              <p class="text-xs text-slate-500">
+                The brain house. Contains model trainers, joblib files, and the
+                CRF features script.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div
+              class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400"
+            >
+              <i class="ri-folder-open-line text-xl"></i>
+            </div>
+            <div>
+              <p class="font-bold text-slate-900">/templates</p>
+              <p class="text-xs text-slate-500">
+                All the HTML files. We use Jinja2 to render these pages
+                dynamically.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div
+              class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400"
+            >
+              <i class="ri-folder-open-line text-xl"></i>
+            </div>
+            <div>
+              <p class="font-bold text-slate-900">/static</p>
+              <p class="text-xs text-slate-500">
+                The styling and script unit. Holds standard CSS, JavaScript, and
+                project assets.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Files -->
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div
+              class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400"
+            >
+              <i class="ri-file-code-line text-xl"></i>
+            </div>
+            <div>
+              <p class="font-bold text-slate-900">app.py</p>
+              <p class="text-xs text-slate-500">
+                The core entry point. It manages all the routes and the API
+                bridge for analysis.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div
+              class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400"
+            >
+              <i class="ri-file-list-line text-xl"></i>
+            </div>
+            <div>
+              <p class="font-bold text-slate-900">requirements.txt</p>
+              <p class="text-xs text-slate-500">
+                The shopping list of all Python libraries needed to run the
+                platform.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div
+              class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400"
+            >
+              <i class="ri-file-info-line text-xl"></i>
+            </div>
+            <div>
+              <p class="font-bold text-slate-900">llms.txt</p>
+              <p class="text-xs text-slate-500">
+                A humanized summary of the project specs for better indexing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Phase -->
+    <section
+      class="bg-slate-900 text-white p-10 md:p-16 rounded-[3rem] shadow-xl"
+      data-aos="fade-up"
+    >
+      <h3 class="text-2xl border-l-4 border-primary pl-3 font-display font-black mb-6 text-white">
+        Running for Production
+      </h3>
+      <p class="text-slate-400 leading-relaxed mb-8">
+        Once the folders are in place and dependencies are installed, you simply
+        launch the engine. The app defaults to <code>127.0.0.1:5000</code>,
+        allowing you to debug and test your changes instantly.
+      </p>
+      <div
+        class="inline-flex items-center gap-4 px-6 py-3 bg-white/5 border border-white/10 rounded-2xl text-xs font-mono"
+      >
+        <span class="text-emerald-300">python</span> app.py
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}

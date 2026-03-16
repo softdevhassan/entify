@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy | NER AI Platform{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-24">
+    <div class="bg-white rounded-[3rem] border-2 border-slate-100 overflow-hidden shadow-sm shadow-indigo-100/10">
+        <!-- Header -->
+        <div class="bg-indigo-600 p-12 md:p-16 text-white text-center">
+            <h1 class="text-4xl font-display font-black mb-4">Privacy <span class="text-indigo-200 italic">Policy</span></h1>
+            <p class="text-indigo-100 font-medium font-display uppercase tracking-widest text-xs">Effective Date: 26 March 2026</p>
+        </div>
+
+        <div class="p-10 md:p-20 prose prose-lg prose-slate max-w-none">
+            <p class="text-slate-600 leading-relaxed font-medium mb-10">
+                This Privacy Policy outlines how the Comparative NER Tool handles and protects user information during its operational cycle. As an academic research project, we prioritize data integrity and transparency.
+            </p>
+
+            <h3 class="font-display font-black text-slate-900 border-l-4 border-indigo-500 pl-4 mt-12 mb-6">1. Data Sovereignty</h3>
+            <p class="mb-8">Your input text is processed in-memory for real-time Named Entity Recognition. We do not persist, store, or warehouse any content analyzed through the platform once the transmission cycle is complete.</p>
+
+            <h3 class="font-display font-black text-slate-900 border-l-4 border-indigo-500 pl-4 mt-12 mb-6">2. Performance Metrics</h3>
+            <p class="mb-8">Our servers log anonymous performance data—specifically processing time and entity counts—to benchmark the evolution from CRF to Neural architectures. No personally identifiable information is associated with these logs.</p>
+
+            <h3 class="font-display font-black text-slate-900 border-l-4 border-indigo-500 pl-4 mt-12 mb-6">3. Academic Scope</h3>
+            <p class="mb-8">This platform serves as a Semester 3 project for the BSCS Batch 24-28 at ILM College Sargodha. Data handling protocols are strictly aligned with academic research ethics.</p>
+
+            <h3 class="font-display font-black text-slate-900 border-l-4 border-indigo-500 pl-4 mt-12 mb-6">4. Security</h3>
+            <p class="mb-8">We implement hardware-level encryption (SSL/TLS) for data in transit during common processing tasks to ensure that your text inputs remain confidential during analysis.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

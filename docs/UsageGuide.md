@@ -1,1 +1,0 @@
-Ye just simple guide ha k project ko run kaisay krna ha. isme koi complex cheez nhi hogi.

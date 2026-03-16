@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}404 - Page Not Found | NER AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-32 text-center">
+    <div class="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-red-50 text-red-500 mb-8 border-2 border-red-100/50" data-aos="zoom-in">
+        <i class="ri-error-warning-line text-5xl"></i>
+    </div>
+    <h1 class="text-6xl md:text-8xl font-display font-black text-slate-900 mb-6 " data-aos="fade-up">404</h1>
+    <p class="text-xl text-slate-500 max-w-md mx-auto mb-12 font-medium" data-aos="fade-up" data-aos-delay="100">
+        The entity you are looking for has been misplaced or never existed in our dataset.
+    </p>
+    <div data-aos="fade-up" data-aos-delay="200">
+        <a href="{{ url_for('home') }}" class="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-primary transition-all duration-300">
+            <i class="ri-home-4-line"></i> Return Home
+        </a>
+    </div>
+</div>
+{% endblock %}

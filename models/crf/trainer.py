@@ -76,7 +76,7 @@ def main():
     print("\nDetailed Classification Report:")
     print(metrics.flat_classification_report(y_test, y_pred, labels=labels, digits=3))
 
-    save_path = os.path.join("data", "processed", "crf_model.joblib")
+    save_path = os.path.join("models", "crf", "crf_model.joblib")
     crf_model.save(save_path)
 
 

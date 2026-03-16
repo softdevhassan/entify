@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | Comparative NER Project{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <!-- Contact Info -->
+        <div data-aos="fade-right">
+            <h4 class="text-xs font-black text-primary uppercase tracking-[0.4em] mb-4">Get in Touch</h4>
+            <h1 class="text-5xl font-display font-black text-slate-900 mb-8 leading-tight">Connect with the <span class="text-primary italic">Architects</span></h1>
+            <p class="text-lg text-slate-500 font-medium leading-relaxed mb-12">
+                Have questions about our CRF implementation or the transition to neural architectures? Reach out to our development group.
+            </p>
+
+            <div class="space-y-8">
+                <div class="flex items-center gap-6">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-secondary flex items-center justify-center text-2xl">
+                        <i class="ri-map-pin-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Institutional Context</p>
+                        <p class="text-slate-900 font-bold">ILM College, Sargodha, Pakistan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div data-aos="fade-left">
+            <div class="bg-white p-10 md:p-12 rounded-[3rem] border-2 border-slate-100 shadow-sm shadow-indigo-100/20">
+                <!-- Easiest working way: Integrated with Formspree (External Submission Service) -->
+                <form action="https://formspree.io/f/mkoqqvab" method="POST" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Your Name</label>
+                            <input type="text" name="name" placeholder="Full Name" required class="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary/20 focus:bg-white focus:outline-none transition-all font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Email Address</label>
+                            <input type="email" name="email" placeholder="email@example.com" required class="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary/20 focus:bg-white focus:outline-none transition-all font-medium">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Subject</label>
+                        <input type="text" name="subject" placeholder="Project Inquiry" required class="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary/20 focus:bg-white focus:outline-none transition-all font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Message</label>
+                        <textarea name="message" rows="4" placeholder="How can we help you?" required class="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary/20 focus:bg-white focus:outline-none transition-all font-medium resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-5 rounded-2xl bg-slate-900 text-white font-display font-black text-lg hover:bg-primary transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-3">
+                        <i class="ri-send-plane-fill"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

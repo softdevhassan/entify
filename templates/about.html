@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}About | Our Journey & Methodology{% endblock %}
+{% block description %}Discover the story behind our Comparative NER platform, from initial academic brainstorming to final cloud implementation.{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-20">
+    <!-- Header -->
+    <div class="mb-20 text-center" data-aos="fade-down">
+        <h1 class="text-xs font-black text-primary uppercase tracking-[0.5em] mb-4">The Project Genesis</h1>
+        <h2 class="text-5xl font-display font-black text-slate-900 mb-8 uppercase">Academic <br><span class="text-primary italic">Specifications</span></h2>
+        
+        <div class="max-w-2xl mx-auto mb-12 p-6 bg-slate-50 border-2 border-slate-100 rounded-3xl">
+            <p class="text-sm text-slate-500 leading-relaxed italic">
+                <strong>Honest Note:</strong> This project wasn't built to solve a specific commercial problem. Instead, it was created as a deep learning exercise to understand the internal mechanics of NLP and the architectural shift from classical models to neural networks.
+            </div>
+
+        <div class="inline-flex items-center gap-4 p-4 bg-white border-2 border-slate-100 rounded-3xl shadow-sm text-slate-600 font-bold text-sm">
+            <span class="flex items-center gap-2 border-r border-slate-200 pr-4"><i class="ri-graduation-cap-line text-primary"></i> ILM College Sargodha</span>
+            <span>Batch BSCS-24-28</span>
+        </div>
+    </div>
+
+    <!-- Genesis Narrative -->
+    <div class="space-y-16">
+        <section class="bg-white p-10 md:p-16 rounded-[3rem] border-2 border-slate-100 relative overflow-hidden" data-aos="fade-up">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50/50 rounded-bl-[100px] -mr-10 -mt-10"></div>
+            
+            <h3 class="text-2xl font-display font-black text-slate-900 mb-8 border-l-4 border-primary pl-6">The Teacher’s Challenge</h3>
+            <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                Our journey began when Sir Abdur-Rehman, who teaches us Artificial Intelligence, announced a major project focused on Natural Language Processing. He didn’t just give us a list of tasks. Instead, he told us to explore the field, find a problem worth solving, and then present a formal proposal as a group.
+            </p>
+            <p class="text-lg text-slate-600 leading-relaxed">
+                After we shared our plan to build a comparative system for Name Entity Recognition, he sat with us and reviewed the technical scope. His feedback was incredibly encouraging, and with a simple "this is a good project," he officially approved our 8-week developmental cycle.
+            </p>
+        </section>
+
+        <!-- Choosing the Topic -->
+        <section class="bg-white p-10 md:p-16 rounded-[3rem] border-2 border-slate-100 relative overflow-hidden" data-aos="fade-up">
+            <h3 class="text-2xl font-display font-black text-slate-900 mb-8 border-l-4 border-emerald-500 pl-6">Deciding on a Topic</h3>
+            <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                It took us a lot of brainstorming to find the right focus. In the beginning, we actually explored several different paths, including building a fake news detector, a social media sentiment tool, and even image or audio-voice detectors. However, each of those had major drawbacks for an 8-week production sprint.
+            </p>
+            <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                We realized that image and audio detection were moving too far away from pure Natural Language Processing. They would have required a whole set of extra libraries for computer vision and audio processing that weren't the core focus of our study. For fake news, we found that models are usually trained on fixed datasets, but the world changes so fast that a truly useful tool would need real-time data which is very hard to maintain.
+            </p>
+            <p class="text-lg text-slate-600 leading-relaxed">
+                Even social media analysis was tricky because the necessary APIs from platforms like Facebook are often quite costly. We wanted a project that wasn't just a prototype but could actually be "production-ready" by the time we finished. Named Entity Recognition allowed exactly that. It has a stable, fixed dataset in CoNLL2003, allowing us to build a robust, professional system that functions perfectly on a live server.
+            </p>
+        </section>
+
+        <!-- Learning Phase -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up">
+            <div class="bg-slate-900 text-white p-10 rounded-[2.5rem]">
+                <h3 class="text-xl font-display font-bold mb-6 text-white underline decoration-primary decoration-4">Growing as a Team</h3>
+                <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                    The team dynamics were quite interesting during the first two weeks. While Hassan Ali already had experience as a developer, Mudassir and Saad Ilyas had to start from the ground up.
+                </p>
+                <div class="space-y-4">
+                    <p class="text-sm text-slate-400 font-medium">They spent those early days diving deep into Python OOP, mastering how to manage code with Git, and learning the fundamentals of Tkinter for desktop design. It was intensive, but it ensured everyone was ready when the real coding started.</p>
+                </div>
+            </div>
+            <div class="bg-indigo-50 p-10 rounded-[2.5rem] border-2 border-indigo-100">
+                <h3 class="text-xl font-display font-bold text-indigo-900 mb-6">The Last-Minute Pivot</h3>
+                <p class="text-sm text-indigo-800/70 leading-relaxed mb-4">
+                    Believe it or not, we actually finished a complete desktop version of this tool using Tkinter by the sixth week. It worked well and had a nice interface. 
+                </p>
+                <p class="text-sm text-indigo-800/70 leading-relaxed">
+                    But since we were already studying Web Technologies at the time, we felt that a web platform would be much more impactful. We spent the final two weeks redesigning everything in Flask and deploying it on an <strong>AWS-EC2</strong> server at <strong>ner.orbin.dev</strong> to make it accessible to everyone.
+                </p>
+            </div>
+        </section>
+
+        <!-- Technical Deep Dive -->
+        <section class="bg-white p-10 md:p-16 rounded-[3rem] border-2 border-slate-100" data-aos="fade-up">
+            <h3 class="text-2xl font-display font-black text-slate-900 mb-8 border-l-4 border-secondary pl-6">A Note on BIO Tagging</h3>
+            <p class="text-slate-600 leading-relaxed mb-8">
+                To identify phrases that contain multiple words, like "Pakistan Cricket Board," our model uses what's called the BIO scheme. It stands for Beginning, Inside, and Outside.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                    <span class="text-primary font-black block mb-2">B (Beginning)</span>
+                    <p class="text-xs text-slate-500 m-0">Marks the very first word of a name or entity.</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                    <span class="text-secondary font-black block mb-2">I (Inside)</span>
+                    <p class="text-xs text-slate-500 m-0">Marks every word that follows within that same entity.</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                    <span class="text-slate-400 font-black block mb-2">O (Outside)</span>
+                    <p class="text-xs text-slate-500 m-0">Marks common words that aren't entities at all.</p>
+                </div>
+            </div>
+
+            <div class="p-8 bg-amber-50 rounded-3xl border border-amber-200">
+                <h4 class="font-display font-black text-amber-900 mb-4 flex items-center gap-2">
+                    <i class="ri-lightbulb-line"></i> Interesting Findings
+                </h4>
+                <p class="text-amber-800/80 text-sm leading-relaxed">
+                    One of the coolest things we noticed was how the models handle ambiguity. For example, our CRF model sometimes called "Google" a location because it often followed the word "at" in the news articles it learned from. This helped us understand why neural networks like spaCy are often more accurate in complex situations.
+                </p>
+            </div>
+        </section>
+
+        <!-- Academic Contribution -->
+        <section id="team" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <div class="max-w-4xl mx-auto" data-aos="zoom-in">
+                    <h2 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Academic Contribution</h2>
+                    <h3 class="text-4xl font-display font-black text-slate-900 mb-12">Our Development Group</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 px-4">
+                        <!-- Hassan Ali -->
+                        <div class="bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 hover:border-primary transition-all shadow-sm group">
+                            <div class="w-16 h-16 mx-auto bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-primary text-3xl group-hover:scale-110 transition-transform">
+                                <i class="ri-user-star-line"></i>
+                            </div>
+                            <h4 class="text-slate-900 font-bold text-xl mb-1">Hassan Ali</h4>
+                            <p class="text-primary text-[10px] font-black uppercase tracking-tighter">Project Team Lead</p>
+                            <div class="mt-4 flex justify-center border-t border-indigo-50 pt-4">
+                                <a href="https://github.com/softdevhassan" target="_blank" class="text-slate-300 hover:text-primary transition-colors">
+                                    <i class="ri-github-fill text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Mudassir -->
+                        <div class="bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 hover:border-emerald-500 transition-all shadow-sm flex flex-col items-center justify-center group">
+                            <div class="w-16 h-16 mx-auto bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 text-secondary text-3xl group-hover:scale-110 transition-transform">
+                                <i class="ri-user-settings-line"></i>
+                            </div>
+                            <h4 class="text-slate-900 font-bold text-xl mb-1 text-center">Mudassir</h4>
+                            <div class="mt-4 flex justify-center border-t border-emerald-50 pt-4 w-full">
+                                <a href="https://github.com/mudassir81cs" target="_blank" class="text-slate-300 hover:text-primary transition-colors">
+                                    <i class="ri-github-fill text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Saad Ilyas -->
+                        <div class="bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 hover:border-accent transition-all shadow-sm flex flex-col items-center justify-center group">
+                            <div class="w-16 h-16 mx-auto bg-purple-50 rounded-2xl flex items-center justify-center mb-6 text-accent text-3xl group-hover:scale-110 transition-transform">
+                                <i class="ri-user-line"></i>
+                            </div>
+                            <h4 class="text-slate-900 font-bold text-xl mb-1 text-center">Saad Ilyas</h4>
+                            <div class="mt-4 flex justify-center border-t border-purple-50 pt-4 w-full">
+                                <a href="https://github.com/saadilyas124" target="_blank" class="text-slate-300 hover:text-primary transition-colors">
+                                    <i class="ri-github-fill text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="inline-block px-10 py-5 rounded-2xl bg-white border border-slate-200 text-slate-500 font-bold text-xs uppercase tracking-widest leading-relaxed">
+                        BSCS (24-28) &bull; Semester 3 AI Project &bull; Group #2 <br>
+                        Duration: 26 Jan 2026 - 26 Mar 2026
+                    </div>
+
+                    <div class="mt-12 text-center" data-aos="zoom-in">
+                        <p class="text-lg font-display font-black text-slate-900 mb-1">ILM College Sargodha Campus</p>
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Affiliated with University of Sargodha</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

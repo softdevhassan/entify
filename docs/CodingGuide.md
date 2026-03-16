@@ -1,1 +1,0 @@
-ye file jb project complete hoga to isme Next developer k liye saari technical information hogi k abhi tk kiya hua k and next woh kiya implrovments kr skta ha.

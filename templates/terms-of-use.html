@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Use | NER AI platform{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-24">
+    <div class="bg-white rounded-[3rem] border-2 border-slate-100 overflow-hidden shadow-sm shadow-emerald-100/10">
+        <!-- Header -->
+        <div class="bg-slate-900 p-12 md:p-16 text-white text-center">
+            <h1 class="text-4xl font-display font-black mb-4">Terms of <span class="text-primary italic">Usage</span></h1>
+            <p class="text-slate-400 font-medium font-display uppercase tracking-widest text-xs">Last Updated: 26 March 2026</p>
+        </div>
+
+        <div class="p-10 md:p-20 prose prose-lg prose-slate max-w-none">
+            <h3 class="font-display font-black text-slate-900 border-l-4 border-primary pl-4 mt-12 mb-6">1. Academic Agreement</h3>
+            <p class="mb-8">By accessing the Comparative NER Tool, you acknowledge that this is a student-led research tool for comparative linguistics and AI architecture analysis. It is provided "as-is" without warranty for mission-critical production environments.</p>
+
+            <h3 class="font-display font-black text-slate-900 border-l-4 border-primary pl-4 mt-12 mb-6">2. Permitted Use</h3>
+            <p class="mb-8">Users are encouraged to interact with the models for educational purposes, benchmarking, and contributing to the open-source repository. Automated scraping or brute-force API testing is strictly prohibited to maintain institutional server health.</p>
+
+            <h3 class="font-display font-black text-slate-900 border-l-4 border-primary pl-4 mt-12 mb-6">3. Attribution</h3>
+            <p class="mb-8">Any research publications or citations utilizing results from this engine must attribute the work to "Group #2, BSCS Batch 24-28, ILM College Sargodha."</p>
+
+            <h3 class="font-display font-black text-slate-900 border-l-4 border-primary pl-4 mt-12 mb-6">4. Disclaimer of Accuracy</h3>
+            <p class="mb-8">Our CRF model (90.32% F1) and spaCy Neural pipeline serve as high-fidelity approximations. Due to the stochastic nature of NLP, absolute accuracy isn't guaranteed.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

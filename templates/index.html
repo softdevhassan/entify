@@ -1,0 +1,477 @@
+{% extends "base.html" %} {% block title %}Try Tool | AI Research
+Platform{% endblock %} {% block description %}Evaluate the architectural shift
+from statistical CRF models to Neural Blackbox transformers in Named Entity
+Recognition.{% endblock %} {% block extra_css %}
+<style>
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  .animate-rotate-slow {
+    animation: rotate-slow 20s linear infinite;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  .bg-grid-mesh {
+    background-image: radial-gradient(circle, #4f46e5 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.03;
+  }
+</style>
+{% endblock %} {% block content %}
+<!-- Premium Hero Section -->
+<section class="relative pt-32 pb-20 overflow-hidden">
+  <!-- Mesh Grid Background -->
+  <div class="absolute inset-0 bg-grid-mesh"></div>
+  
+  <!-- Animated Background Blobs & Shapes -->
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-blob"></div>
+  <div class="absolute top-1/2 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
+  <div class="absolute -bottom-24 left-1/3 w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] animate-blob animation-delay-4000"></div>
+  <div class="absolute top-1/4 -right-24 w-120 h-120 bg-secondary/20 rounded-full blur-[100px] animate-blob"></div>
+  
+  <!-- Rotating Tech Aura -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-primary/5 rounded-full animate-rotate-slow pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-accent/5 rounded-full animate-rotate-slow [animation-direction:reverse] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-4xl mx-auto" data-aos="fade-up">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 mb-8"
+      >
+        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        <span
+          class="text-[10px] font-black text-primary uppercase tracking-widest"
+          >ILM College | BSCS (24-28) | Group #2</span
+        >
+      </div>
+      <h1
+        class="text-6xl md:text-8xl font-display font-black text-slate-900 mb-8 tracking-tight leading-[0.9]"
+      >
+        Neural <span class="text-primary italic">vs</span> <br />
+        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Statistical</span>
+      </h1>
+      <p
+        class="text-xl text-slate-500 font-medium mb-12 leading-relaxed max-w-2xl mx-auto"
+      >
+        Explore the performance gap between classical mathematical models
+        trained on <strong>14,041 sentences</strong> and modern
+        <strong>deep neural</strong> architectures.
+      </p>
+      <div class="flex flex-row items-center justify-center gap-3 sm:gap-4">
+        <a
+          href="{{ url_for('tool') }}"
+          class="group px-6 py-4 sm:px-8 sm:py-5 rounded-xl sm:rounded-2xl bg-slate-900 text-white font-display font-black text-sm sm:text-lg hover:bg-primary transition-all flex items-center gap-2 sm:gap-3 shadow-2xl shadow-slate-900/20"
+        >
+          Try Tool
+          <i
+            class="ri-arrow-right-line group-hover:translate-x-1 transition-transform"
+          ></i>
+        </a>
+        <a
+          href="{{ url_for('about') }}"
+          class="px-6 py-4 sm:px-8 sm:py-5 rounded-xl sm:rounded-2xl bg-white border-2 border-slate-300 text-slate-600 font-display font-black text-sm sm:text-lg hover:bg-slate-50 transition-all"
+        >
+          About Project
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Grid -->
+<section class="py-24 bg-white relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+      <!-- CRF Profile -->
+      <div
+        class="bg-white p-10 rounded-[2.5rem] border-2 border-indigo-100 shadow-sm"
+        data-aos="fade-right"
+      >
+        <div class="flex items-center gap-4 mb-8">
+          <div
+            class="w-12 h-12 rounded-xl bg-indigo-50 text-primary flex items-center justify-center text-2xl"
+          >
+            <i class="ri-functions"></i>
+          </div>
+          <div>
+            <h4 class="font-display font-black text-slate-900 text-xl">
+              CRF (Statistical)
+            </h4>
+            <p
+              class="text-xs font-bold text-slate-400 uppercase tracking-tighter"
+            >
+              Mathematical Weights
+            </p>
+          </div>
+        </div>
+        <div class="space-y-6 mb-8">
+          <p class="text-slate-600 leading-relaxed font-medium">
+            Our custom CRF model uses statistical transition probabilities to
+            find entities. We trained it on 14,041 sentences from the CoNLL2003
+            dataset, achieving a highly accurate results through rule-based
+            features.
+          </p>
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100"
+            >
+              <p class="text-lg font-black text-primary">90.32%</p>
+              <p class="text-[10px] uppercase font-bold text-slate-400">
+                Weighted F1
+              </p>
+            </div>
+            <div
+              class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100"
+            >
+              <p class="text-lg font-black text-primary">14,041</p>
+              <p class="text-[10px] uppercase font-bold text-slate-400">
+                Train Sentences
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="p-6 bg-slate-50 rounded-2xl text-xs font-medium text-slate-500 leading-relaxed italic"
+        >
+          Every decision made by the CRF is based on observable word shapes and
+          local context, providing a transparent view into how entities are
+          classified.
+        </div>
+      </div>
+
+      <!-- SpaCy Profile -->
+      <div
+        class="bg-white p-10 rounded-[2.5rem] border-2 border-emerald-100 shadow-sm"
+        data-aos="fade-left"
+      >
+        <div class="flex items-center gap-4 mb-8">
+          <div
+            class="w-12 h-12 rounded-xl bg-emerald-50 text-secondary flex items-center justify-center text-2xl"
+          >
+            <i class="ri-cpu-line"></i>
+          </div>
+          <div>
+            <h4 class="font-display font-black text-slate-900 text-xl">
+              spaCy (Neural)
+            </h4>
+            <p class="text-xs font-bold text-slate-400 uppercase">
+              Neural Network Model
+            </p>
+          </div>
+        </div>
+        <div class="space-y-6 mb-8">
+          <p class="text-slate-600 leading-relaxed font-medium">
+            Running on the <strong>en_core_web_sm</strong> multi-task CNN model, spaCy acts as a
+            neural blackbox. It processes text through high-dimensional
+            feature embeddings to build a deep semantic understanding of the input.
+          </p>
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              class="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100"
+            >
+              <p class="text-lg font-black text-secondary">2.5B</p>
+              <p class="text-[10px] uppercase font-bold text-slate-400">
+                Parameters
+              </p>
+            </div>
+            <div
+              class="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100"
+            >
+              <p class="text-lg font-black text-secondary">18+</p>
+              <p class="text-[10px] uppercase font-bold text-slate-400">
+                Label Types
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="p-6 bg-slate-50 rounded-2xl text-xs font-medium text-slate-500 leading-relaxed italic"
+        >
+          These models excel at understanding similarity and can often classify
+          entities correctly even when the surrounding context is unique or
+          noisy.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paradigm Shift: Full Width Break -->
+<section class="relative py-24 bg-slate-900 overflow-hidden">
+  <!-- Interactive Background Element -->
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#4f46e5_0%,transparent_50%)]"></div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="max-w-4xl mx-auto text-center" data-aos="zoom-in">
+      <h2 class="text-xs font-black text-primary uppercase tracking-[0.5em] mb-8">The Core Thesis</h2>
+      <blockquote class="text-3xl md:text-5xl font-display font-black text-white leading-[1.1] mb-12 tracking-tight">
+        "We are moving from an era where we <span class="text-primary italic">program</span> computers with rules, to an era where we <span class="text-emerald-400 italic">train</span> them with patterns."
+      </blockquote>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-12 text-slate-400">
+        <div class="flex flex-col items-center">
+            <span class="text-4xl font-display font-black text-white mb-2">100%</span>
+            <span class="text-[10px] uppercase font-bold tracking-widest">Mathematical Traceability</span>
+        </div>
+        <div class="h-px w-12 bg-slate-800 hidden md:block"></div>
+        <div class="flex flex-col items-center">
+            <span class="text-4xl font-display font-black text-white mb-2">Multi-Task</span>
+            <span class="text-[10px] uppercase font-bold tracking-widest">Neural Pipeline</span>
+        </div>
+        <div class="h-px w-12 bg-slate-800 hidden md:block"></div>
+        <div class="flex flex-col items-center">
+            <span class="text-4xl font-display font-black text-white mb-2">0.5ms</span>
+            <span class="text-[10px] uppercase font-bold tracking-widest">Inference Benchmark</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Decorative Edge -->
+  <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+</section>
+
+<!-- Detailed Methodology & Case Study -->
+<section class="py-24 bg-[#f8fafc]">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      <!-- Left Column: BIO Tagging -->
+      <div
+        class="bg-white p-10 md:p-16 rounded-[3.5rem] border-2 border-slate-100 flex flex-col justify-between shadow-sm"
+        data-aos="fade-right"
+      >
+        <div>
+          <h3
+            class="text-2xl font-display font-black text-slate-900 mb-8 border-l-4 border-secondary pl-6"
+          >
+            BIO Tagging Architecture
+          </h3>
+          <p class="text-slate-600 leading-relaxed mb-8">
+            Our <strong>CRF Model</strong>, a type of
+            <strong>Supervised ML</strong>, is trained on the labeled
+            <strong>CoNLL2003</strong> dataset. It uses the
+            <strong>BIO scheme</strong> to precisely detect where complex
+            entities, like
+            <span class="text-primary font-bold"
+              >"World Health Organization"</span
+            >, start and end.
+          </p>
+          <div class="space-y-4">
+            <div
+              class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-primary transition-colors"
+            >
+              <span
+                class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-black"
+                >B</span
+              >
+              <div>
+                <p
+                  class="text-sm font-black text-slate-900 uppercase tracking-wider"
+                >
+                  Beginning
+                </p>
+                <p class="text-sm text-slate-500 font-medium">
+                  Example: <span class="text-primary font-bold">B-ORG</span> for
+                  <span class="italic">"World"</span>
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-secondary transition-colors"
+            >
+              <span
+                class="w-10 h-10 rounded-xl bg-secondary text-white flex items-center justify-center font-black"
+                >I</span
+              >
+              <div>
+                <p
+                  class="text-sm font-black text-slate-900 uppercase tracking-wider"
+                >
+                  Inside
+                </p>
+                <p class="text-sm text-slate-500 font-medium">
+                  Example:
+                  <span class="text-secondary font-bold">I-ORG</span> for
+                  <span class="italic">"Health"</span> or
+                  <span class="italic">"Organization"</span>
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100"
+            >
+              <span
+                class="w-10 h-10 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center font-black"
+                >O</span
+              >
+              <div>
+                <p
+                  class="text-sm font-black text-slate-900 uppercase tracking-wider"
+                >
+                  Outside
+                </p>
+                <p class="text-sm text-slate-500 font-medium">
+                  Common words like <span class="italic">"is"</span>,
+                  <span class="italic">"the"</span>, or
+                  <span class="italic">"at"</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Case Study (Black UI) -->
+      <div
+        class="bg-slate-900 p-10 md:p-16 rounded-[3.5rem] text-white flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-slate-900/40"
+        data-aos="fade-left"
+      >
+        <div
+          class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full -mr-32 -mt-32 blur-[100px] opacity-50"
+        ></div>
+
+        <div class="relative z-10">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-8"
+          >
+            <span
+              class="text-[10px] font-black text-emerald-400 uppercase tracking-widest leading-none"
+              >Dataset Case Study</span
+            >
+          </div>
+          <h3
+            class="text-2xl font-display font-black mb-8 border-l-4 border-emerald-500 pl-6 text-white uppercase tracking-tight"
+          >
+            The CoNLL2003 Paradox
+          </h3>
+          <p class="text-slate-400 leading-relaxed mb-8">
+            While training on 14,041 news segments, we discovered why raw math
+            isn't enough. Our custom CRF model often labeled
+            <span class="text-white font-bold italic">"Google"</span> as a
+            <span class="text-emerald-400 font-bold">Location (LOC)</span>
+            rather than an organization.
+          </p>
+
+          <div
+            class="p-6 bg-white/5 border border-white/10 rounded-3xl rounded-bl-none mb-8"
+          >
+            <p class="text-sm font-mono text-slate-400 leading-relaxed italic">
+              "...they were meeting
+              <span
+                class="bg-indigo-500/30 text-indigo-200 px-2 py-0.5 rounded border border-indigo-400/20"
+                >at Google headquarters</span
+              >
+              in Zurich."
+            </p>
+          </div>
+
+          <p class="text-sm text-slate-400 leading-relaxed font-medium">
+            Because "Google" frequently follows spatial prepositions like
+            <span class="text-white">"at"</span> or
+            <span class="text-white">"in"</span> in the 2003 Reuters dataset,
+            the statistical model learned that "at [Word]" usually implies a
+            physical location. This explains the specific performance gap we see
+            when compared to neural networks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- College Information Section -->
+<section class="py-20 bg-white border-t border-slate-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <div
+      class="bg-slate-50 rounded-[3rem] p-10 md:p-16 border border-slate-100 relative overflow-hidden"
+    >
+      <div class="absolute top-0 right-0 p-8 opacity-5">
+        <i class="ri-building-line text-9xl"></i>
+      </div>
+      <div
+        class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+      >
+        <div>
+          <h2
+            class="text-3xl md:text-5xl font-display font-black text-slate-900 mb-6 leading-tight"
+          >
+            ILM College <span class="text-primary">Sargodha</span>
+          </h2>
+          <p class="text-lg text-slate-500 font-medium mb-8">
+            Affiliated with
+            <span class="text-slate-900 font-bold">University of Sargodha</span
+            >. Developed as a core
+            <strong>Natural Language Processing (NLP)</strong> project for
+            academic learning under the expert coordination of
+            <strong>Sir. Abdur Rehman</strong> Term #3, Artificial Intelligence.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <div
+              class="px-5 py-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3"
+            >
+              <i class="ri-group-line text-primary"></i>
+              <span class="text-sm font-bold text-slate-700"
+                >Batch BSCS 24-28</span
+              >
+            </div>
+            <div
+              class="px-5 py-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3"
+            >
+              <i class="ri-team-line text-primary"></i>
+              <span class="text-sm font-bold text-slate-700">Group #2</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0"
+            >
+              <i class="ri-map-pin-2-line text-xl"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900 mb-1">Location</h4>
+              <p class="text-sm text-slate-500 font-medium leading-relaxed">
+                Sargodha, Punjab<br />Pakistan
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center flex-shrink-0"
+            >
+              <i class="ri-database-2-line text-xl"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900 mb-1">Model Training</h4>
+              <p class="text-sm text-slate-500 font-medium leading-relaxed">
+                Supervised Learning via CoNLL2003 Dataset<br />
+                Transition Features & BIO Scheme Implementation
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

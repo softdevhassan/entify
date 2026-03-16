@@ -1,0 +1,82 @@
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
+/* Base Styles */
+html {
+    scroll-behavior: smooth;
+    letter-spacing: normal !important;
+}
+
+body {
+    letter-spacing: normal !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: normal !important;
+}
+
+/* Entity Highlighting */
+.entity {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    margin: 0 0.125rem;
+    border-width: 2px;
+    position: relative;
+    font-size: 0.95em;
+}
+
+.entity::after {
+    content: attr(data-label);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    margin-left: 0.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    opacity: 0.7;
+}
+
+/* Entity Colors */
+.ent-per { background: #eef2ff; border-color: #c7d2fe; text-color: #4338ca; }
+.ent-org { background: #ecfdf5; border-color: #a7f3d0; text-color: #047857; }
+.ent-loc { background: #fffbeb; border-color: #fde68a; text-color: #b45309; }
+.ent-misc { background: #f5f3ff; border-color: #ddd6fe; text-color: #7c3aed; }
+
+/* Custom Focus Ring */
+.focus-ring {
+    outline: none;
+    transition: all 0.3s ease;
+}
+.focus-ring:focus {
+    ring-width: 4px;
+    ring-color: rgba(79, 70, 229, 0.1);
+    border-color: #4f46e5;
+}
+
+/* Footer Themes */
+.footer-dark {
+    background: #0f172a;
+    color: #94a3b8;
+}
+.footer-dark a {
+    color: #cbd5e1;
+}
+.footer-dark a:hover {
+    color: #ffffff;
+}

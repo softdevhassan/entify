@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Comparative NER AI | Group #2{% endblock %}</title>
+    <meta name="description" content="{% block description %}A powerful comparative Named Entity Recognition tool built by BSCS Semester 3 students.{% endblock %}">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#10b981',
+                        dark: '#0f172a',
+                        accent: '#8b5cf6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    
+    <style>
+        [x-cloak] { display: none !important; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-primary selection:text-white">
+
+    <nav class="sticky top-0 z-50 glass-nav border-b border-white/20" x-data="{ mobileMenuOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="{{ url_for('home') }}" class="flex items-center gap-2.5 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center font-bold text-2xl group-hover:ring-2 ring-primary ring-offset-2 transition-all duration-300">
+                            N
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-display font-bold text-xl text-slate-900 leading-none">NERAI</span>
+                            <span class="text-[10px] font-bold text-slate-400">Try Tool</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="{{ url_for('home') }}" class="px-4 py-2 rounded-lg font-semibold text-slate-600 hover:text-primary hover:bg-slate-50 transition-all duration-200">Home</a>
+                    <a href="{{ url_for('tool') }}" class="px-4 py-2 rounded-lg font-semibold text-slate-600 hover:text-primary hover:bg-slate-50 transition-all duration-200">Try Tool</a>
+                    
+                    <!-- About Dropdown -->
+                    <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <a href="{{ url_for('about') }}" class="flex items-center gap-1 px-4 py-2 rounded-lg font-semibold text-slate-600 hover:text-primary hover:bg-slate-50 transition-all duration-200 focus:outline-none">
+                            About <i class="ri-arrow-down-s-line transition-transform duration-300" :class="{'rotate-180': open}"></i>
+                        </a>
+                        <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="absolute left-0 mt-1 w-64 bg-white rounded-xl border border-slate-200 py-2 shadow-xl shadow-slate-200/50 z-50">
+                            <a href="{{ url_for('about') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">
+                                <i class="ri-information-line text-lg"></i> About Project
+                            </a>
+                            <a href="{{ url_for('timeline') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">
+                                <i class="ri-history-line text-lg"></i> Project Timeline
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Docs Dropdown -->
+                    <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <button class="flex items-center gap-1 px-4 py-2 rounded-lg font-semibold text-slate-600 hover:text-primary hover:bg-slate-50 transition-all duration-200 focus:outline-none">
+                            Docs <i class="ri-arrow-down-s-line transition-transform duration-300" :class="{'rotate-180': open}"></i>
+                        </button>
+                        <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="absolute left-0 mt-1 w-64 bg-white rounded-xl border border-slate-200 py-2 shadow-xl shadow-slate-200/50 z-50">
+                            <a href="{{ url_for('docs_user') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">
+                                <i class="ri-book-open-line text-lg"></i> User Guide
+                            </a>
+                            <a href="{{ url_for('docs_dev') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">
+                                <i class="ri-code-s-slash-line text-lg"></i> Developer Guide
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="{{ url_for('contact') }}" class="px-4 py-2 rounded-lg font-semibold text-slate-600 hover:text-primary hover:bg-slate-50 transition-all duration-200">Contact</a>
+                    
+                    <a href="https://github.com/softdevhassan/COMPARATIVE-NER-NLP-AI" target="_blank" class="ml-4 px-6 py-3 rounded-xl bg-slate-900 text-white hover:bg-primary font-bold flex items-center gap-2.5 transition-all duration-300 group ring-4 ring-slate-900/5 hover:ring-primary/20">
+                        <i class="ri-github-fill text-xl group-hover:rotate-12 transition-transform"></i>
+                        <span class="text-xs font-bold">View on GitHub</span>
+                    </a>
+                </div>
+                
+                <div class="flex items-center md:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-500 hover:text-primary focus:outline-none p-2 rounded-xl bg-white border border-slate-200">
+                        <i class="ri-menu-3-line text-2xl" x-show="!mobileMenuOpen"></i>
+                        <i class="ri-close-line text-2xl" x-show="mobileMenuOpen" x-cloak></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="mobileMenuOpen" x-cloak x-transition class="md:hidden border-t border-slate-100 bg-white p-4 space-y-2">
+            <a href="{{ url_for('home') }}" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50">Home</a>
+            <a href="{{ url_for('tool') }}" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50">Try Tool</a>
+            <div class="h-px bg-slate-50 my-2"></div>
+            <a href="{{ url_for('about') }}" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50">About Project</a>
+            <a href="{{ url_for('docs_user') }}" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50">User Guide</a>
+            <a href="{{ url_for('docs_dev') }}" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50">Developer Guide</a>
+            <a href="https://github.com/softdevhassan/COMPARATIVE-NER-NLP-AI" target="_blank" class="flex items-center justify-center gap-2 w-full px-4 py-4 rounded-xl bg-slate-900 text-white font-bold mt-4">
+                <i class="ri-github-fill text-xl"></i> View on GitHub
+            </a>
+        </div>
+    </nav>
+
+    <main class="min-h-[calc(100vh-5rem-400px)]">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Futuristic Lab Footer -->
+    <footer class="relative bg-[#020617] pt-32 pb-12 overflow-hidden border-t border-slate-900">
+        <!-- Tech Decorative Background -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,#4f46e510_0%,transparent_50%)]"></div>
+            <div class="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_70%,#10b98110_0%,transparent_50%)]"></div>
+            <!-- Animated Scanline -->
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_2px,3px_100%]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <!-- Main Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-20">
+                <!-- Brand Engine Section -->
+                <div class="col-span-1 lg:col-span-1">
+                    <div class="mb-8">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="relative group">
+                                <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                                <div class="relative w-10 h-10 bg-slate-950 rounded-xl flex items-center justify-center font-black text-xl text-white border border-white/10">N</div>
+                            </div>
+                            <span class="text-2xl font-display font-black text-white tracking-widest uppercase">NER<span class="text-primary italic">AI</span></span>
+                        </div>
+                        <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                            A comparative research platform exploring the mathematical foundation of CRF models vs. the semantic depth of Neural Transformers.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <a href="https://github.com/softdevhassan/COMPARATIVE-NER-NLP-AI" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-primary transition-all">
+                            <i class="ri-github-fill text-xl"></i>
+                        </a>
+                        <div class="h-4 w-px bg-white/10"></div>
+                        <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest">v1.2.0 Stable</span>
+                    </div>
+                </div>
+
+                <!-- Glass Hub Navigation -->
+                <div class="col-span-1 lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Nav Card 1 -->
+                    <div class="bg-white/[0.02] border border-white/5 p-8 rounded-[2rem] backdrop-blur-xl group hover:border-primary/30 transition-all">
+                        <h4 class="text-xs font-black text-primary uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+                             Navigation <i class="ri-arrow-right-up-line opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </h4>
+                        <div class="space-y-4">
+                            <a href="{{ url_for('home') }}" class="block text-slate-400 hover:text-white text-sm font-bold transition-all">Project Overview</a>
+                            <a href="{{ url_for('tool') }}" class="block text-slate-400 hover:text-white text-sm font-bold transition-all">Try Tool</a>
+                            <a href="{{ url_for('about') }}" class="block text-slate-400 hover:text-white text-sm font-bold transition-all">The Research Team</a>
+                        </div>
+                    </div>
+
+                    <!-- Nav Card 2 -->
+                    <div class="bg-white/[0.02] border border-white/5 p-8 rounded-[2rem] backdrop-blur-xl group hover:border-emerald-500/30 transition-all">
+                        <h4 class="text-xs font-black text-emerald-500 uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+                             Resources <i class="ri-book-open-line opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </h4>
+                        <div class="space-y-4">
+                            <a href="{{ url_for('docs_user') }}" class="block text-slate-400 hover:text-white text-sm font-bold transition-all">User Guide</a>
+                            <a href="{{ url_for('docs_dev') }}" class="block text-slate-400 hover:text-white text-sm font-bold transition-all">Dev Manual</a>
+                            <a href="{{ url_for('timeline') }}" class="block text-slate-400 hover:text-white text-sm font-bold transition-all">Project Timeline</a>
+                        </div>
+                    </div>
+
+                    <!-- Nav Card 3 -->
+                    <div class="bg-slate-900/50 border border-white/5 p-8 rounded-[2rem] group hover:border-accent/30 transition-all relative overflow-hidden">
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-accent/10 rounded-full blur-2xl"></div>
+                        <h4 class="text-xs font-black text-accent uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+                            Institution <i class="ri-government-line"></i>
+                        </h4>
+                        <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest leading-loose">
+                            Affiliated with<br/>
+                            <span class="text-white text-xs">University of Sargodha</span><br/>
+                            BSCS Batch 24-28
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Data Bar -->
+            <div class="border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-4">
+                    <div class="flex flex-col">
+                        <span class="text-slate-600 text-[11px] font-black uppercase tracking-[0.2em] mb-1">Developed At</span>
+                        <span class="text-white text-sm font-display font-black">ILM COLLEGE SARGODHA</span>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <p class="text-slate-600 text-[11px] font-black uppercase  mb-2 leading-none">
+                        Comparative NER  • Artificial Intelligence Project • Term 3
+                    </p>
+                    <div class="flex items-center justify-center md:justify-end gap-6">
+                        <a href="{{ url_for('privacy') }}" class="text-slate-500 hover:text-white text-[11px] font-bold transition-colors">Privacy</a>
+                        <a href="{{ url_for('terms') }}" class="text-slate-500 hover:text-white text-[11px] font-bold transition-colors">Terms</a>
+                        <p class="text-slate-700 text-[11px] font-bold uppercase">&copy; 2026 NERAI</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cyber Decoration Bottom -->
+        <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-quint'
+        });
+    </script>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

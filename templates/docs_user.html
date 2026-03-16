@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}User Guide | Try Tool{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-20">
+    <div class="mb-16" data-aos="fade-down">
+        <h1 class="text-4xl font-display font-black text-slate-900 mb-4">User Guide</h1>
+        <p class="text-xl text-slate-500 leading-relaxed">Everything you need to know about using our comparative analysis platform.</p>
+    </div>
+
+    <div class="space-y-12">
+        <!-- Section 1 -->
+        <section class="bg-white p-8 md:p-12 rounded-[2.5rem] border-2 border-slate-50 shadow-sm" data-aos="fade-up">
+            <h3 class="text-xl font-display font-black text-slate-900 mb-6 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-50 text-primary flex items-center justify-center text-sm font-bold">1</span>
+                Inputting Your Text
+            </h3>
+            <p class="text-slate-600 leading-relaxed mb-6">
+                Start by pasting the content you want to analyze into the main text area on the Tool page. For the best result, we recommend using sentences that mention names, organizations, or locations. 
+            </p>
+            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 text-sm text-slate-500 italic">
+                You can use the samples provided at the bottom of the input area to see how the system handles different types of news or business text.
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="bg-white p-8 md:p-12 rounded-[2.5rem] border-2 border-slate-50 shadow-sm" data-aos="fade-up">
+            <h3 class="text-xl font-display font-black text-slate-900 mb-6 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-50 text-primary flex items-center justify-center text-sm font-bold">2</span>
+                Choosing an Execution Mode
+            </h3>
+            <p class="text-slate-600 leading-relaxed mb-6">
+                Our platform lets you choose exactly how you want to run the analysis. You can look at the CRF model to see how statistical weights work, or switch to the Neural mode to see the power of spaCy. 
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+                If you want to see them go head-to-head, use the Comparison mode. This will run both models simultaneously and show you a detailed breakdown of their performance differences.
+            </p>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="bg-white p-8 md:p-12 rounded-[2.5rem] border-2 border-slate-50 shadow-sm" data-aos="fade-up">
+            <h3 class="text-xl font-display font-black text-slate-900 mb-6 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-50 text-primary flex items-center justify-center text-sm font-bold">3</span>
+                Understanding the Results
+            </h3>
+            <p class="text-slate-600 leading-relaxed mb-8">
+                Once the analysis is complete, the results will appear below the input section. We've designed this to be very visual so you can quickly see the differences.
+            </p>
+            <ul class="space-y-6">
+                <li class="flex gap-4">
+                    <i class="ri-check-line text-emerald-500 mt-1"></i>
+                    <div>
+                        <p class="font-bold text-slate-900">Entity Highlights</p>
+                        <p class="text-sm text-slate-600">The original text will be color-coded based on the type of entity found, such as blue for people or green for locations.</p>
+                    </div>
+                </li>
+                <li class="flex gap-4">
+                    <i class="ri-check-line text-emerald-500 mt-1"></i>
+                    <div>
+                        <p class="font-bold text-slate-900">Performance Metrics</p>
+                        <p class="text-sm text-slate-600">You'll see exactly how long each model took to process the text, measured in milliseconds, and the confidence level of the findings.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+{% endblock %}

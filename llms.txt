@@ -1,0 +1,17 @@
+# Comparative Named Entity Recognition System
+A high-performance research platform comparing CRF and spaCy NER architectures.
+
+## Institutional Context
+The project title is Comparative Named Entity Recognition System Using CRF and spaCy Models. This was built for the Artificial Intelligence course in BSCS Semester 3 at ILM College Sargodha, Punjab, Pakistan. Under the mentorship of Sir Abdur-Rehman, the development cycle lasted 8 weeks from 26 January 2026 to 26 March 2026. The system is now fully completed and deployed on AWS-EC2.
+
+## Team Structure
+Hassan Ali led the project, managing the CRF lifecycle, backend, and web integration. Mudassir handled the spaCy integration and neural pipeline analysis. Saad Ilyas focused on UI/UX design, moving from the initial Tkinter prototype to the final Flask frontend.
+
+## Technical Evolution
+During the first four weeks, we focused on desktop research and developing a functional Tkinter GUI. In weeks five and six, we pivoted to a Flask Web Architecture to better utilize our web technology skills. The final two weeks were dedicated to system integration, AWS-EC2 deployment, and performance benchmarking.
+
+## Key Performance Indicators
+Our custom CRF model achieved a 90.32% F1 score after training on 14,041 sentences from the CoNLL2003 dataset. For neural analysis, we used the spaCy en_core_web_sm model which operates with 2.5 billion core parameters.
+
+## Core Documentation
+You can find the User Guide at /docs/user and the Developer Manual at /docs/dev. Our full journey is documented at /timeline, and the code is available on GitHub at https://github.com/softdevhassan/COMPARATIVE-NER-NLP-AI.
