@@ -25,7 +25,7 @@ jobs:
       - name: Deploy via rsync
         uses: burnett01/rsync-deployments@7.0.0
         with:
-          switches: -avz --delete --exclude='.env' --exclude='venv' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc'
+          switches: -avz --delete --exclude='.env' --exclude='ner' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc'
           path: ./
           remote_path: /var/www/html/ner.orbin.dev/
           remote_host: ${{ secrets.SSH_HOST }}
