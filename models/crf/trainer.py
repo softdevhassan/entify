@@ -63,11 +63,10 @@ def main():
     crf_model = CRFModel(c1=0.1, c2=0.1, max_iterations=100)
     crf_model.train(X_train, y_train)
 
-    # 4. Evaluate
     print("Evaluating model...")
     y_pred = crf_model.predict(X_test)
 
-    # Filter labels to only include important entity categories (ignoring O)
+    # Filter labels to only include important entity categories (ignoring O) BIO perinciple
     labels = list(crf_model.model.classes_)
     labels.remove("O")
 
@@ -77,7 +76,6 @@ def main():
     print("\nDetailed Classification Report:")
     print(metrics.flat_classification_report(y_test, y_pred, labels=labels, digits=3))
 
-    # 5. Save Model
     save_path = os.path.join("data", "processed", "crf_model.joblib")
     crf_model.save(save_path)
 
