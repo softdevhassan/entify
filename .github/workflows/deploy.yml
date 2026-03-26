@@ -52,6 +52,10 @@ jobs:
             set -e
             cd /var/www/html/ner.orbin.dev
 
+            # Stop MySQL before deploying Flask (free up memory)
+            echo "Stopping MySQL..."
+            sudo systemctl stop mysql || true
+
             # Create virtual environment if it doesn't exist
             if [ ! -d "ner" ]; then
                 echo "Creating virtual environment..."
@@ -65,5 +69,6 @@ jobs:
             pip install --upgrade pip
             pip install -r requirements.txt
 
-            # Restart the service (service file already exists on server)
+            # Restart the Flask service
+            echo "Restarting ner-flask..."
             sudo systemctl restart ner-flask
