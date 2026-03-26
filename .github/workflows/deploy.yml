@@ -77,20 +77,20 @@ jobs:
             # Create/Update the systemd service file for Entify
             echo "Configuring entify.service..."
             sudo bash -c 'cat <<EOF > /etc/systemd/system/entify.service
-[Unit]
-Description=Gunicorn instance to serve Entify NER
-After=network.target
+            [Unit]
+            Description=Gunicorn instance to serve Entify NER
+            After=network.target
 
-[Service]
-User=${{ secrets.SSH_USER }}
-Group=www-data
-WorkingDirectory=/var/www/html/entify.orbin.dev
-Environment="PATH=/var/www/html/entify.orbin.dev/entify-env/bin"
-ExecStart=/var/www/html/entify.orbin.dev/entify-env/bin/gunicorn --workers 3 --bind unix:entify.sock -m 007 app:app
+            [Service]
+            User=${{ secrets.SSH_USER }}
+            Group=www-data
+            WorkingDirectory=/var/www/html/entify.orbin.dev
+            Environment="PATH=/var/www/html/entify.orbin.dev/entify-env/bin"
+            ExecStart=/var/www/html/entify.orbin.dev/entify-env/bin/gunicorn --workers 3 --bind unix:entify.sock -m 007 app:app
 
-[Install]
-WantedBy=multi-user.target
-EOF'
+            [Install]
+            WantedBy=multi-user.target
+            EOF'
 
             # Reload systemd and switch services
             sudo systemctl daemon-reload
