@@ -36,7 +36,7 @@
         </h2>
         <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5 space-y-6">
             <p class="text-slate-600 font-bold leading-relaxed">
-                To begin your analysis, navigate to the <a href="{{ url_for('tool') }}" class="text-brand-600 underline">NER Engine Lab</a>. You have two ways to input data:
+                To begin your analysis, navigate to the <a href="{{ url_for('tool') }}" class="text-brand-600 underline">Try Tool</a> Page. You have two ways to input data:
             </p>
             <ul class="space-y-4">
                 <li class="flex gap-4">
@@ -50,7 +50,7 @@
                     <i class="ri-magic-line text-brand-500 text-xl mt-1"></i>
                     <div>
                         <strong class="text-slate-900 block font-black uppercase text-xs mb-1">Presets</strong>
-                        <span class="text-slate-500 text-sm font-medium">Use one of our four curated presets (News, Tech, Finance, Business) to see the tool in action instantly.</span>
+                        <span class="text-slate-500 text-sm font-medium">Use one of our four presets (News, Tech, Finance, Business) to see the tool in action instantly.</span>
                     </div>
                 </li>
             </ul>
@@ -66,20 +66,20 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="p-6 bg-slate-50 border border-black/5 rounded-xl">
                 <h3 class="text-sm font-black text-emerald-600 uppercase mb-3">CRF Model (Green)</h3>
-                <p class="text-xs font-bold text-slate-500 leading-relaxed">
+                <p class="text-sm font-bold text-slate-500 leading-relaxed">
                     Our Statistical model. It uses mathematical sequences to identify patterns quickly. Best for structured documents and predictable entities.
                 </p>
             </div>
             <div class="p-6 bg-slate-50 border border-black/5 rounded-xl">
                 <h3 class="text-sm font-black text-purple-600 uppercase mb-3">SpaCy Model (Purple)</h3>
-                <p class="text-xs font-bold text-slate-500 leading-relaxed">
+                <p class="text-sm font-bold text-slate-500 leading-relaxed">
                     Our Neural Network model. It understands context and semantic nuances. Best for complex, conversational, or diverse text inputs.
                 </p>
             </div>
         </div>
         <div class="mt-6 p-6 bg-brand-600 text-white rounded-xl">
             <h3 class="text-sm font-black uppercase mb-2">Comparison Mode</h3>
-            <p class="text-xs font-bold leading-relaxed">
+            <p class="text-sm font-bold leading-relaxed">
                 The most powerful way to use {{ APP_NAME }}. It runs both models simultaneously and provides a side-by-side benchmark of extraction quality and speed.
             </p>
         </div>

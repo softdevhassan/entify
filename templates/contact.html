@@ -36,11 +36,11 @@
                 <h3 class="text-sm font-black text-brand-600 uppercase mb-6 tracking-widest">Inquiry Channels</h3>
                 <div class="space-y-6">
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600">
+                        <div class="w-10 h-10 p-4 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600">
                             <i class="ri-mail-line"></i>
                         </div>
                         <div>
-                            <span class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-tighter">Primary Contact</span>
+                            <span class="block text-[12px] font-black text-slate-600 uppercase mb-1">Primary Contact</span>
                             <a href="mailto:{{ CONTACT_EMAIL }}" class="text-sm font-black text-slate-800 hover:text-brand-600 transition-colors underline decoration-brand-200">{{ CONTACT_EMAIL }}</a>
                         </div>
                     </div>
@@ -49,8 +49,8 @@
                             <i class="ri-github-fill"></i>
                         </div>
                         <div>
-                            <span class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-tighter">Code Collaboration</span>
-                            <a href="{{ APP_GITHUB_REPO_URL }}" target="_blank" class="text-sm font-black text-slate-800 hover:text-brand-600 transition-colors uppercase">{{ APP_NAME }} Repository</a>
+                            <span class="block text-[12px] font-black text-slate-600 uppercase mb-1">Code Collaboration</span>
+                            <a href="{{ APP_GITHUB_REPO_URL }}" target="_blank" class="text-sm font-black text-slate-800 hover:text-brand-600 transition-colors">{{ APP_NAME }} Repository <i class="ri-external-link-line"></i></a>
                         </div>
                     </div>
                 </div>
@@ -61,20 +61,20 @@
                 <h3 class="text-sm font-black text-slate-900 uppercase mb-6 tracking-widest">Research Center</h3>
                 <div class="space-y-6">
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400">
-                            <i class="ri-government-line"></i>
+                        <div class="w-14 h-14 rounded-xl bg-white flex items-center justify-center overflow-hidden ring-1 ring-black/10 shadow-sm transition-all group-hover:ring-brand-500/30">
+                            <img src="{{ url_for('static', filename='images/ilm_logo.png') }}" class="w-full h-full object-contain p-1.5" alt="ILM Logo">
                         </div>
                         <div>
-                            <span class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-tighter">Study Center</span>
+                            <span class="block text-[10px] font-black text-slate-500 uppercase mb-1">Study Center</span>
                             <a href="{{ ILM_URL }}" target="_blank" class="text-sm font-black text-slate-800 hover:text-brand-600 transition-colors underline decoration-brand-200">ILM College Sargodha Campus</a>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400">
-                            <i class="ri-graduation-cap-line"></i>
+                        <div class="w-14 h-14 rounded-xl bg-white flex items-center justify-center overflow-hidden ring-1 ring-black/10 shadow-sm transition-all group-hover:ring-brand-500/30">
+                            <img src="{{ url_for('static', filename='images/uos_logo.jpeg') }}" class="w-full h-full object-contain p-1.5" alt="UOS Logo">
                         </div>
                         <div>
-                            <span class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-tighter">Affiliation</span>
+                            <span class="block text-[10px] font-black text-slate-500 uppercase mb-1">Affiliation</span>
                             <a href="{{ UOS_URL }}" target="_blank" class="text-sm font-black text-slate-800 uppercase hover:text-brand-600 transition-colors underline decoration-brand-200">University of Sargodha</a>
                         </div>
                     </div>
@@ -84,19 +84,19 @@
 
         <!-- Contact Form -->
         <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5 shadow-xl shadow-slate-200/50">
-            <form @submit.prevent="alert('Thank you! This is a project prototype. Email softdevhassan.biz@gmail.com for real inquiries.')">
+            <form action="https://formspree.io/f/mkoqqvab" method="POST">
                 <div class="space-y-5">
                     <div>
-                        <label class="text-[10px] font-black text-slate-400 uppercase mb-2 block tracking-widest">Full Name</label>
-                        <input type="text" placeholder="Hassan Ali" class="w-full bg-slate-50 border border-black/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all font-medium">
+                        <label class="text-[12px] font-black text-slate-600 uppercase mb-2 block tracking-widest">Full Name</label>
+                        <input type="text" placeholder="John doe" class="w-full bg-slate-50 border border-black/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all font-medium" name="name" required>
                     </div>
                     <div>
-                        <label class="text-[10px] font-black text-slate-400 uppercase mb-2 block tracking-widest">Email Address</label>
-                        <input type="email" placeholder="example@gmail.com" class="w-full bg-slate-50 border border-black/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all font-medium">
+                        <label class="text-[12px] font-black text-slate-600 uppercase mb-2 block tracking-widest">Email Address</label>
+                        <input type="email" placeholder="example@gmail.com" class="w-full bg-slate-50 border border-black/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all font-medium" name="email" required>
                     </div>
                     <div>
-                        <label class="text-[10px] font-black text-slate-400 uppercase mb-2 block tracking-widest">Your Message</label>
-                        <textarea rows="4" placeholder="Brief technical or project inquiry..." class="w-full bg-slate-50 border border-black/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all font-medium"></textarea>
+                        <label class="text-[12px] font-black text-slate-600 uppercase mb-2 block tracking-widest">Your Message</label>
+                        <textarea rows="4" placeholder="Brief technical or project inquiry..." class="w-full bg-slate-50 border border-black/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all font-medium" name="message" required></textarea>
                     </div>
                     <button type="submit" class="w-full bg-slate-900 text-white rounded-xl py-4 font-black uppercase text-xs tracking-widest hover:bg-brand-600 transition-all shadow-lg hover:shadow-brand-500/20 mt-4 flex items-center justify-center gap-2">
                         Send <i class="ri-send-plane-fill"></i>

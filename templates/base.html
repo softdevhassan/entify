@@ -3,13 +3,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      {% block title %}{{ APP_NAME }} | Advanced Comparative NER AI{% endblock %}
+      {% block title %}{{ APP_NAME }} | Advanced Comparative NER AI{% endblock
+      %}
     </title>
     <meta
       name="description"
       content="{% block description %}{{ APP_NAME }}: A production-grade comparative Named Entity Recognition laboratory. Benchmark CRF vs spaCy models with real-time performance metrics and deep-dive entity analysis.{% endblock %}"
     />
-    <meta name="keywords" content="NER, Named Entity Recognition, CRF, spaCy, NLP, Natural Language Processing, AI Research, Comparative NLP, {{ APP_NAME }}" />
+    <meta
+      name="keywords"
+      content="NER, Named Entity Recognition, CRF, spaCy, NLP, Natural Language Processing, AI Research, Comparative NLP, {{ APP_NAME }}"
+    />
     <meta name="author" content="Hassan Ali" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="{{ request.url }}" />
@@ -17,36 +21,54 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ request.url }}" />
-    <meta property="og:title" content="{% block og_title %}{{ APP_NAME }} | Comparative NER Engine Lab{% endblock %}" />
-    <meta property="og:description" content="{% block og_description %}Experience the future of NLP with Entify. A high-performance research platform comparing CRF and spaCy NER architectures.{% endblock %}" />
-    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.png') }}" />
+    <meta
+      property="og:title"
+      content="{% block og_title %}{{ APP_NAME }} | Comparative NER Engine Lab{% endblock %}"
+    />
+    <meta
+      property="og:description"
+      content="{% block og_description %}Experience the future of NLP with Entify. A high-performance research platform comparing CRF and spaCy NER architectures.{% endblock %}"
+    />
+    <meta
+      property="og:image"
+      content="{{ url_for('static', filename='images/og-image.png') }}"
+    />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="{{ request.url }}" />
-    <meta property="twitter:title" content="{% block twitter_title %}{{ APP_NAME }} | Comparative NER Engine Lab{% endblock %}" />
-    <meta property="twitter:description" content="{% block twitter_description %}Experience the future of NLP with Entify. A high-performance research platform comparing CRF and spaCy NER architectures.{% endblock %}" />
-    <meta property="twitter:image" content="{{ url_for('static', filename='images/og-image.png') }}" />
+    <meta
+      property="twitter:title"
+      content="{% block twitter_title %}{{ APP_NAME }} | Comparative NER Engine Lab{% endblock %}"
+    />
+    <meta
+      property="twitter:description"
+      content="{% block twitter_description %}Experience the future of NLP with Entify. A high-performance research platform comparing CRF and spaCy NER architectures.{% endblock %}"
+    />
+    <meta
+      property="twitter:image"
+      content="{{ url_for('static', filename='images/og-image.png') }}"
+    />
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "{{ APP_NAME }}",
-      "operatingSystem": "Web",
-      "applicationCategory": "ResearchApplication",
-      "description": "A Comparative Named Entity Recognition System evaluating CRF and spaCy architectures.",
-      "author": {
-        "@type": "Person",
-        "name": "Hassan Ali"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0.00",
-        "priceCurrency": "USD"
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "{{ APP_NAME }}",
+        "operatingSystem": "Web",
+        "applicationCategory": "ResearchApplication",
+        "description": "A Comparative Named Entity Recognition System evaluating CRF and spaCy architectures.",
+        "author": {
+          "@type": "Person",
+          "name": "Hassan Ali"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD"
+        }
       }
-    }
     </script>
 
     <!-- Favicon -->
@@ -186,15 +208,49 @@
         scrollbar-width: none; /* Firefox */
       }
 
-      .mobile-drawer {
-        @apply fixed inset-y-0 right-0 w-72 sm:w-80 bg-white z-[100] transform transition-transform duration-500 ease-in-out border-l border-black/10 shadow-2xl flex flex-col;
+      /* Preloader Styles */
+      #preloader {
+        @apply fixed inset-0 z-[9999] flex items-center justify-center bg-slate-50;
+        transition:
+          opacity 0.6s ease-out,
+          visibility 0.6s;
       }
-      
-      .body-lock {
-        overflow: hidden !important;
-        height: 100vh !important;
-        width: 100% !important;
-        position: fixed !important;
+
+      .loader-content {
+        @apply flex flex-col items-center gap-6;
+      }
+
+      .loader-logo {
+        @apply w-20 h-20 rounded-2xl bg-brand-600 text-white flex items-center justify-center text-4xl shadow-2xl shadow-brand-500/20 animate-pulse;
+      }
+
+      .loader-bar {
+        @apply w-32 h-1 bg-slate-200 rounded-full overflow-hidden relative;
+      }
+
+      .loader-progress {
+        @apply absolute inset-0 bg-brand-600 w-0;
+        animation: progress 2s ease-in-out infinite;
+      }
+
+      @keyframes progress {
+        0% {
+          left: -100%;
+          width: 50%;
+        }
+        50% {
+          left: 25%;
+          width: 50%;
+        }
+        100% {
+          left: 100%;
+          width: 50%;
+        }
+      }
+
+      .preloader-hidden {
+        opacity: 0;
+        visibility: hidden;
       }
     </style>
 
@@ -205,6 +261,24 @@
     :class="{ 'overflow-hidden': mobileMenuOpen }"
     x-data="{ mobileMenuOpen: false }"
   >
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader-content">
+        <div class="loader-logo">
+          <i class="ri-git-branch-line"></i>
+        </div>
+        <div class="flex flex-col items-center gap-3">
+          <span
+            class="text-2xl font-display font-bold text-slate-900"
+            style="text-transform: none !important"
+            >Entify</span
+          >
+          <div class="loader-bar">
+            <div class="loader-progress"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Background Elements -->
     <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
       <div
@@ -244,7 +318,7 @@
                   >{{ APP_NAME }}</span
                 >
                 <span
-                  class="text-[10px] font-bold text-slate-400 uppercase mt-0.5"
+                  class="text-[12px] font-bold text-slate-500 uppercase mt-0.5"
                   >Learning Project</span
                 >
               </div>
@@ -304,7 +378,7 @@
               @mouseleave="open = false"
             >
               <button class="nav-link flex items-center gap-1">
-                Resources
+                Docs
                 <i
                   class="ri-arrow-down-s-line transition-transform duration-300"
                   :class="{'rotate-180': open}"
@@ -416,7 +490,7 @@
               class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
               >Project Timeline</a
             >
-           
+
             <a
               href="{{ url_for('docs_user') }}"
               class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
@@ -470,33 +544,41 @@
           <!-- Branding Card -->
           <div class="lg:col-span-5" data-aos="fade-up">
             <div class="flex items-center gap-3 mb-3">
-                <div
-                  class="w-11 h-11 rounded-xl bg-brand-600 border border-brand-700/20 flex items-center justify-center text-white shadow-lg shadow-brand-900/10"
-                >
-                  <i class="ri-git-branch-line text-2xl font-light"></i>
-                </div>
+              <div
+                class="w-11 h-11 rounded-xl bg-brand-600 border border-brand-700/20 flex items-center justify-center text-white shadow-lg shadow-brand-900/10"
+              >
+                <i class="ri-git-branch-line text-2xl font-light"></i>
+              </div>
               <div class="flex flex-col gap-0.5">
                 <div class="flex items-center gap-2">
-                    <span class="text-2xl font-display font-black text-slate-900 leading-none">{{ APP_NAME }}</span>
-                    {% if APP_MODE != 'PROD' %}
-                    <span class="px-1.5 py-0.5 rounded-md bg-amber-100 border border-amber-500/20 text-amber-600 text-[8px] font-black uppercase tracking-tighter">{{ APP_MODE }}</span>
-                    {% endif %}
+                  <span
+                    class="text-2xl font-display font-black text-slate-900 leading-none"
+                    >{{ APP_NAME }}</span
+                  >
+                  {% if APP_MODE != 'PROD' %}
+                  <span
+                    class="px-1.5 py-0.5 rounded-md bg-amber-100 border border-amber-500/20 text-amber-600 text-[8px] font-black uppercase tracking-tighter"
+                    >{{ APP_MODE }}</span
+                  >
+                  {% endif %}
                 </div>
-                <span class="text-[10px] font-bold text-slate-400 uppercase">Learning Project</span>
+                <span class="text-[12px] font-bold text-slate-500 uppercase"
+                  >Learning Project</span
+                >
               </div>
             </div>
             <p class="text-slate-500 text-sm leading-loose mb-2 font-medium">
-              {{ APP_NAME }} is a Comparative NER Project to monitor differences between
-              Statistical and Neural Network Models, built by University Students
-              as a Semester Project.
+              {{ APP_NAME }} is a Comparative NER Project to monitor differences
+              between Statistical and Neural Network Models, built by University
+              Students as a Semester Project.
             </p>
-              <a
-                href="{{ APP_GITHUB_REPO_URL }}"
-                target="_blank"
-                class="rounded-xl bg-white border border-black/10 flex items-center justify-center text-slate-500 hover:text-white hover:bg-slate-900 hover:border-slate-900 transition-all duration-300 w-fit px-4 py-2 font-bold text-sm group"
-              >
-                <i class="ri-github-fill text-xl mr-2"></i> View on Github
-              </a>
+            <a
+              href="{{ APP_GITHUB_REPO_URL }}"
+              target="_blank"
+              class="rounded-xl bg-white border border-black/10 flex items-center justify-center text-slate-500 hover:text-white hover:bg-slate-900 hover:border-slate-900 transition-all duration-300 w-fit px-4 py-2 font-bold text-sm group"
+            >
+              <i class="ri-github-fill text-xl mr-2"></i> View on Github
+            </a>
           </div>
 
           <!-- Quick Links -->
@@ -579,7 +661,11 @@
               Institution
             </h4>
             <div class="space-y-6">
-              <a href="{{ UOS_URL }}" target="_blank" class="flex items-center gap-4 group cursor-pointer">
+              <a
+                href="{{ UOS_URL }}"
+                target="_blank"
+                class="flex items-center gap-4 group cursor-pointer"
+              >
                 <div
                   class="w-14 h-14 rounded-xl bg-white p-1.5 ring-1 ring-black/5 overflow-hidden transition-all group-hover:ring-brand-500/30"
                 >
@@ -590,15 +676,20 @@
                   />
                 </div>
                 <div class="flex flex-col">
-                  <span class="text-[10px] font-black text-slate-400 uppercase"
+                  <span class="text-[11px] font-black text-slate-500 uppercase"
                     >Main Affiliation</span
                   >
-                  <span class="text-sm font-bold text-slate-700 underline decoration-slate-200 group-hover:text-brand-600 transition-colors"
+                  <span
+                    class="text-sm font-bold text-slate-700 underline decoration-slate-200 group-hover:text-brand-600 transition-colors"
                     >University of Sargodha</span
                   >
                 </div>
               </a>
-              <a href="{{ ILM_URL }}" target="_blank" class="flex items-center gap-4 group cursor-pointer">
+              <a
+                href="{{ ILM_URL }}"
+                target="_blank"
+                class="flex items-center gap-4 group cursor-pointer"
+              >
                 <div
                   class="w-14 h-14 rounded-xl bg-white p-1.5 ring-1 ring-black/5 overflow-hidden transition-all group-hover:ring-accent-500/30"
                 >
@@ -609,10 +700,11 @@
                   />
                 </div>
                 <div class="flex flex-col">
-                  <span class="text-[10px] font-black text-slate-400 uppercase"
+                  <span class="text-[11px] font-black text-slate-500 uppercase"
                     >Study Center</span
                   >
-                  <span class="text-sm font-bold text-slate-700 underline decoration-slate-200 group-hover:text-accent-600 transition-colors"
+                  <span
+                    class="text-sm font-bold text-slate-700 underline decoration-slate-200 group-hover:text-accent-600 transition-colors"
                     >ILM COLLEGE SARGODHA</span
                   >
                 </div>
@@ -635,12 +727,12 @@
             <div class="flex items-center gap-6">
               <a
                 href="{{ url_for('privacy') }}"
-                class="text-[11px] font-black text-slate-400 hover:text-brand-600 uppercase transition-colors"
+                class="text-[11px] font-black text-slate-500 hover:text-brand-600 uppercase transition-colors"
                 >Privacy Policy</a
               >
               <a
                 href="{{ url_for('terms') }}"
-                class="text-[11px] font-black text-slate-400 hover:text-brand-600 uppercase transition-colors"
+                class="text-[11px] font-black text-slate-500 hover:text-brand-600 uppercase transition-colors"
                 >Terms of Use</a
               >
             </div>
@@ -650,8 +742,12 @@
               class="px-3 py-1 rounded-full bg-emerald-100/50 border border-emerald-500/20 text-emerald-600 text-[11px] font-black uppercase flex items-center gap-2"
             >
               <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
+                ></span>
               </span>
               System Operational
             </span>
@@ -712,6 +808,19 @@
     </script>
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+      // Preloader Handler
+      window.addEventListener("load", function () {
+        const preloader = document.getElementById("preloader");
+        setTimeout(() => {
+          preloader.classList.add("preloader-hidden");
+          // Allow AOS to start after preloader is gone
+          setTimeout(() => {
+            AOS.refresh();
+          }, 100);
+        }, 800); // Small delay for aesthetic "premium" feel
+      });
+    </script>
     {% block extra_js %}{% endblock %}
   </body>
 </html>
