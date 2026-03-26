@@ -183,6 +183,7 @@ def sitemap():
 def api_compare():
     data = request.get_json()
     text = data.get("text", "")
+    mode = data.get("mode", "compare").lower()  # modes: 'compare', 'crf', 'spacy'
 
     # Input Validation & Sanitization
     if not text or not text.strip():
@@ -206,87 +207,97 @@ def api_compare():
     crf_model, crf_loaded = get_crf_model()
 
     # Process with SpaCy
-    if spacy_model:
-        try:
-            spacy_results = spacy_model.process(text)
-            results["spacy"]["entities"] = spacy_results.get("entities", [])
-            results["spacy"]["processing_time"] = spacy_results.get(
-                "processing_time", 0
-            )
-        except Exception as e:
-            results["spacy"]["error"] = str(e)
+    if mode in ["spacy", "compare"]:
+        if spacy_model:
+            try:
+                spacy_results = spacy_model.process(text)
+                results["spacy"]["entities"] = spacy_results.get("entities", [])
+                results["spacy"]["processing_time"] = spacy_results.get(
+                    "processing_time", 0
+                )
+            except Exception as e:
+                results["spacy"]["error"] = str(e)
+        else:
+            results["spacy"]["error"] = "SpaCy model is not initialized."
     else:
-        results["spacy"]["error"] = "SpaCy model is not initialized."
+        results["spacy"] = None  # Remove key if not requested
 
     # Process with CRF
-    if crf_loaded:
-        try:
-            start_t = time.time()
-            sentence = text.split()
-            # Predict labels
-            predictions = crf_model.predict([features])[0]
-            # Predict marginal probabilities for confidence scores
-            marginals = crf_model.predict_marginals([features])[0]
-            end_t = time.time()
+    if mode in ["crf", "compare"]:
+        if crf_loaded:
+            try:
+                start_t = time.time()
+                sentence = text.split()
+                # Extract features for the sentence
+                features = [extract_features(sentence, i) for i in range(len(sentence))]
+                # Predict labels
+                predictions = crf_model.predict([features])[0]
+                # Predict marginal probabilities for confidence scores
+                marginals = crf_model.predict_marginals([features])[0]
+                end_t = time.time()
 
-            # Map predictions to entities layout
-            entities = []
-            current_entity = None
+                # Map predictions to entities layout
+                entities = []
+                current_entity = None
 
-            # Reconstruct character offsets for CRF based purely on word splits (approximate)
-            current_char_idx = 0
+                # Reconstruct character offsets for CRF based purely on word splits (approximate)
+                current_char_idx = 0
 
-            for i, (word, pred, prob_dist) in enumerate(zip(sentence, predictions, marginals)):
-                # Find start char index of the word in original text
-                start_char = text.find(word, current_char_idx)
-                if start_char == -1: start_char = current_char_idx
-                end_char = start_char + len(word)
-                current_char_idx = end_char
+                for i, (word, pred, prob_dist) in enumerate(zip(sentence, predictions, marginals)):
+                    # Find start char index of the word in original text
+                    start_char = text.find(word, current_char_idx)
+                    if start_char == -1: start_char = current_char_idx
+                    end_char = start_char + len(word)
+                    current_char_idx = end_char
 
-                # Get confidence for the predicted label
-                confidence = round(prob_dist.get(pred, 0) * 100, 1)
+                    # Get confidence for the predicted label
+                    confidence = round(prob_dist.get(pred, 0) * 100, 1)
 
-                if pred != "O":
-                    # Remove B- or I- prefixes if present
-                    label = pred.split("-")[-1] if "-" in pred else pred
+                    if pred != "O":
+                        # Remove B- or I- prefixes if present
+                        label = pred.split("-")[-1] if "-" in pred else pred
 
-                    if (
-                        pred.startswith("B-")
-                        or current_entity is None
-                        or current_entity["label"] != label
-                    ):
+                        if (
+                            pred.startswith("B-")
+                            or current_entity is None
+                            or current_entity["label"] != label
+                        ):
+                            if current_entity:
+                                entities.append(current_entity)
+                            current_entity = {
+                                "text": word,
+                                "label": label,
+                                "start": start_char,
+                                "end": end_char,
+                                "confidence": confidence
+                            }
+                        else:
+                            # Append to current entity
+                            current_entity["text"] += " " + word
+                            current_entity["end"] = end_char
+                            # Track minimum confidence in multi-word entity
+                            current_entity["confidence"] = min(current_entity.get("confidence", 100), confidence)
+                    else:
                         if current_entity:
                             entities.append(current_entity)
-                        current_entity = {
-                            "text": word,
-                            "label": label,
-                            "start": start_char,
-                            "end": end_char,
-                            "confidence": confidence
-                        }
-                    else:
-                        # Append to current entity
-                        current_entity["text"] += " " + word
-                        current_entity["end"] = end_char
-                        # Track minimum confidence in multi-word entity
-                        current_entity["confidence"] = min(current_entity.get("confidence", 100), confidence)
-                else:
-                    if current_entity:
-                        entities.append(current_entity)
-                        current_entity = None
+                            current_entity = None
 
-            if current_entity:
-                entities.append(current_entity)
+                if current_entity:
+                    entities.append(current_entity)
 
-            results["crf"]["entities"] = entities
-            results["crf"]["processing_time"] = round(end_t - start_t, 4)
+                results["crf"]["entities"] = entities
+                results["crf"]["processing_time"] = round(end_t - start_t, 4)
 
-        except Exception as e:
-            results["crf"]["error"] = str(e)
+            except Exception as e:
+                results["crf"]["error"] = str(e)
+        else:
+            results["crf"]["error"] = "CRF model is not trained yet. Run trainer.py first."
     else:
-        results["crf"]["error"] = "CRF model is not trained yet. Run trainer.py first."
+        results["crf"] = None  # Remove key if not requested
 
-    return jsonify(results)
+    # Clean results: Remove None keys
+    final_results = {k: v for k, v in results.items() if v is not None}
+    return jsonify(final_results)
 
 
 if __name__ == "__main__":

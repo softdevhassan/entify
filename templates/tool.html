@@ -160,12 +160,12 @@
         <div class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm">
           <span class="text-[10px] font-black text-slate-600 uppercase mb-2 block">Processing Time</span>
           <div x-show="mode === 'compare'" class="flex items-baseline gap-2">
-            <span class="text-3xl font-display font-black text-emerald-600" x-text="results.crf.processing_time"></span>
+            <span class="text-3xl font-display font-black text-emerald-600" x-text="results.crf?.processing_time || 0"></span>
             <span class="text-xs font-black text-slate-300 uppercase">VS</span>
-            <span class="text-3xl font-display font-black text-purple-600" x-text="results.spacy.processing_time"></span>
+            <span class="text-3xl font-display font-black text-purple-600" x-text="results.spacy?.processing_time || 0"></span>
           </div>
           <div x-show="mode !== 'compare'">
-            <span class="text-3xl font-display font-black" :class="mode === 'crf' ? 'text-emerald-600' : 'text-purple-600'" x-text="mode === 'crf' ? results.crf.processing_time : results.spacy.processing_time"></span>
+            <span class="text-3xl font-display font-black" :class="mode === 'crf' ? 'text-emerald-600' : 'text-purple-600'" x-text="mode === 'crf' ? (results.crf?.processing_time || 0) : (results.spacy?.processing_time || 0)"></span>
             <span class="text-sm font-black text-slate-300 uppercase">s</span>
           </div>
         </div>
@@ -343,12 +343,16 @@
         const crfQuality = (crfComp * 1.5) + (this.stats.crfUnique * 1.0);
         const spaQuality = (spaComp * 1.5) + (this.stats.spacyUnique * 1.0);
         
-        if (crfQuality > spaQuality) this.stats.qualityWinner = "CRF Leads";
-        else if (spaQuality > crfQuality) this.stats.qualityWinner = "SpaCy Leads";
-        else this.stats.qualityWinner = "Draw";
+        if (this.mode === 'compare') {
+            if (crfQuality > spaQuality) this.stats.qualityWinner = "CRF Leads";
+            else if (spaQuality > crfQuality) this.stats.qualityWinner = "SpaCy Leads";
+            else this.stats.qualityWinner = "Draw";
+        } else {
+            this.stats.qualityWinner = this.mode === 'crf' ? "CRF Active" : "SpaCy Active";
+        }
 
         const confValues = crf.map(e => e.confidence || 0);
-        this.stats.avgConfidence = confValues.length ? Math.round(confValues.reduce((a, b) => a + b, 0) / confValues.length) : 95;
+        this.stats.avgConfidence = confValues.length ? Math.round(confValues.reduce((a, b) => a + b, 0) / confValues.length) : (this.mode === 'spacy' ? 'N/A' : 95);
       },
 
       updateVisualization() {
@@ -396,10 +400,14 @@
 
       exportTxt() {
           let text = `ENTIFY NER RESULTS\n==================\n\nINPUT: ${this.inputText}\n\n`;
-          text += `CRF ENTITIES:\n`;
-          this.results.crf.entities.forEach(e => text += `- ${e.text} (${e.label}) [Conf: ${e.confidence}%]\n`);
-          text += `\nSPACY ENTITIES:\n`;
-          this.results.spacy.entities.forEach(e => text += `- ${e.text} (${e.label})\n`);
+          if (this.results.crf) {
+            text += `CRF ENTITIES:\n`;
+            this.results.crf.entities.forEach(e => text += `- ${e.text} (${e.label}) [Conf: ${e.confidence}%]\n`);
+          }
+          if (this.results.spacy) {
+            text += `\nSPACY ENTITIES:\n`;
+            this.results.spacy.entities.forEach(e => text += `- ${e.text} (${e.label})\n`);
+          }
           
           const blob = new Blob([text], { type: 'text/plain' });
           const a = document.createElement('a');
@@ -409,6 +417,7 @@
       },
 
       renderSummaryCharts() {
+        if (!this.results.crf || !this.results.spacy) return; // Only show comparison charts
         if (this.countChartInstance) this.countChartInstance.destroy();
         if (this.speedChartInstance) this.speedChartInstance.destroy();
         const common = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, font: { weight: "black", size: 10 } } }, scales: { y: { beginAtZero: true, grid: { color: "rgba(0,0,0,0.03)" } }, x: { grid: { display: false } } } };

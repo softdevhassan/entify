@@ -36,6 +36,14 @@ class CRFModel:
             raise ValueError("Model has not been trained or loaded.")
         return self.model.predict(X_test)
 
+    def predict_marginals(self, X_test):
+        """
+        Predicts marginal probabilities for a list of sentences (features).
+        """
+        if self.model is None:
+            raise ValueError("Model has not been trained or loaded.")
+        return self.model.predict_marginals(X_test)
+
     def save(self, file_path):
         """
         Saves the trained model to a file.
